@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var ref = require('ref');
+var ref = require('ref-napi');
 var Iconv = require('iconv').Iconv;
 
 /**

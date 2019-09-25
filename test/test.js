@@ -1,6 +1,6 @@
 
 var assert = require('assert');
-var ref = require('ref');
+var ref = require('ref-napi');
 var wchar_t = require('../');
 var wchar_string = wchar_t.string;
 var bindings = require('bindings')({ module_root: __dirname, bindings: 'test' })

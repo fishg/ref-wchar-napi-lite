@@ -10,7 +10,7 @@ static wchar_t w = L'w';
 static wchar_t s[] = L"hello world";
 static wchar_t **str = reinterpret_cast<wchar_t **>(&s);
 
-void Initialize(v8::Handle<v8::Object> target) {
+void Initialize(v8::Local<v8::Object> target) {
   Nan::HandleScope scope;
 
   Nan::Set(target, Nan::New<v8::String>("w").ToLocalChecked(), Nan::NewBuffer(reinterpret_cast<char *>(&w), sizeof(w)).ToLocalChecked());
