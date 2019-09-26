@@ -1,12 +1,12 @@
-ref-wchar
+ref-wchar-napi
 ==========
 ### A ref "type" implementation of `wchar_t *` (a.k.a. wide string) backed by "node-iconv"
-[![Build Status](https://secure.travis-ci.org/TooTallNate/ref-wchar.svg)](https://travis-ci.org/TooTallNate/ref-wchar)
-[![Build Status](https://ci.appveyor.com/api/projects/status/xmne006y9jma3pm0?svg=true)](https://ci.appveyor.com/project/TooTallNate/ref-wchar)
+[![Build Status](https://secure.travis-ci.org/Janealter/ref-wchar-napi.svg)](https://travis-ci.org/Janealter/ref-wchar-napi)
+[![Build Status](https://ci.appveyor.com/api/projects/status/v5ej12uqw1u0379j?svg=true)](https://ci.appveyor.com/project/Janealter/ref-wchar-napi)
 
 This module offers a ["wide
 strings"](http://en.wikipedia.org/wiki/Wide_character#C.2FC.2B.2B) (`wchar_t *`)
-implementation on top of Node.js Buffers using the ref "type" interface.
+implementation on top of Node.js Buffers using the ref "type" interface. Supports Node 6, 7, 8, 10, 12.
 
 
 Installation
@@ -15,7 +15,7 @@ Installation
 Install with `npm`:
 
 ``` bash
-$ npm install ref-wchar
+$ npm install ref-wchar-napi
 ```
 
 
@@ -40,9 +40,9 @@ EXPORT wchar_t **str = (wchar_t **)(&s);
 ```
 
 ``` js
-var ref = require('ref');
+var ref = require('ref-napi');
 var dlfcn = require('dlfcn');
-var wchar_t = require('ref-wchar');
+var wchar_t = require('ref-wchar-napi');
 var wchar_string = wchar_t.string;
 
 var lib = dlfcn('./libexample');
