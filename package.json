@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Janealter/ref-wchar-napi",
   "dependencies": {
-    "iconv": "2",
+    "iconv-lite": "^0.6.2",
     "ref-napi": "^1.4.2"
   },
   "devDependencies": {

@@ -4,7 +4,8 @@
  */
 
 var ref = require('ref-napi');
-var Iconv = require('iconv').Iconv;
+// var Iconv = require('iconv').Iconv;
+var iconv = require('iconv-lite');
 
 /**
  * On Windows they're UTF-16 (2-bytes),
@@ -20,8 +21,8 @@ if ('win32' == process.platform) {
   size = 4;
 }
 
-var getter = new Iconv('UTF-' + (8 * size) + ref.endianness, 'UTF-8');
-var setter = new Iconv('UTF-8', 'UTF-' + (8 * size) + ref.endianness);
+// var getter = new Iconv('UTF-' + (8 * size) + ref.endianness, 'UTF-8');
+//var setter = new Iconv('UTF-8', 'UTF-' + (8 * size) + ref.endianness);
 
 
 /**
@@ -42,9 +43,9 @@ exports.get = function get (buf, offset) {
 exports.set = function set (buf, offset, val) {
   var _buf = val; // assume val is a Buffer by default
   if (typeof val === 'string') {
-    _buf = setter.convert(val[0]);
+    _buf = iconv.encode(val[0], 'UTF' + (8 * size) + '-' + ref.endianness);//setter.convert(val[0]);
   } else if (typeof val === 'number') {
-    _buf = setter.convert(String.fromCharCode(val));
+    _buf = iconv.encode(String.fromCharCode(val), 'UTF' + (8 * size) +'-' + ref.endianness);//setter.convert(String.fromCharCode(val));
   } else if (!_buf) {
     throw new TypeError('muss pass a String, Number, or Buffer for `wchar_t`');
   }
@@ -72,7 +73,7 @@ exports.string.get = function get (buf, offset) {
 exports.string.set = function set (buf, offset, val) {
   var _buf = val; // val is a Buffer? it better be \0 terminated...
   if ('string' == typeof val) {
-    _buf = setter.convert(val + '\0');
+    _buf = iconv.encode(val + '\0', 'UTF' + (8 * size)+'-' + ref.endianness);//setter.convert(val + '\0');
   }
   return buf.writePointer(_buf, offset);
 };
@@ -85,5 +86,5 @@ exports.string.set = function set (buf, offset, val) {
  */
 
 exports.toString = function toString (buffer) {
-  return getter.convert(buffer).toString('utf8');
+  return iconv.decode(buffer,'utf-8');
 };
